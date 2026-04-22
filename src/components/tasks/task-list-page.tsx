@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, Building2, FileText, Image as ImageIcon, LayoutGrid, Tag, User } from 'lucide-react'
+import { ProfileAuthBanner } from '@/components/auth/profile-auth-banner'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
 import { TaskListClient } from '@/components/tasks/task-list-client'
@@ -33,6 +34,8 @@ const variantShells = {
   'image-portfolio': 'bg-[linear-gradient(180deg,#07111f_0%,#13203a_100%)] text-white',
   'profile-creator': 'bg-[linear-gradient(180deg,#0a1120_0%,#101c34_100%)] text-white',
   'profile-business': 'bg-[linear-gradient(180deg,#f6fbff_0%,#ffffff_100%)]',
+  'pdf-editorial': 'bg-[linear-gradient(180deg,#f4faf9_0%,#ffffff_100%)]',
+  'org-editorial': 'bg-[linear-gradient(180deg,#f4faf9_0%,#ffffff_100%)]',
   'classified-bulletin': 'bg-[linear-gradient(180deg,#edf3e4_0%,#ffffff_100%)]',
   'classified-market': 'bg-[linear-gradient(180deg,#f4f6ef_0%,#ffffff_100%)]',
   'sbm-curation': 'bg-[linear-gradient(180deg,#fff7ee_0%,#ffffff_100%)]',
@@ -69,26 +72,35 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
         input: 'border-white/10 bg-white/6 text-white',
         button: 'bg-white text-slate-950 hover:bg-slate-200',
       }
-    : layoutKey.startsWith('article') || layoutKey.startsWith('sbm')
+      : layoutKey.startsWith('article') || layoutKey.startsWith('sbm')
       ? {
           muted: 'text-[#72594a]',
           panel: 'border border-[#dbc6b6] bg-white/90',
           soft: 'border border-[#dbc6b6] bg-[#fff8ef]',
-          input: 'border border-[#dbc6b6] bg-white text-[#2f1d16]',
+          input: 'border border-border bg-input text-foreground',
           button: 'bg-[#2f1d16] text-[#fff4e4] hover:bg-[#452920]',
         }
-      : {
-          muted: 'text-slate-600',
-          panel: 'border border-slate-200 bg-white',
-          soft: 'border border-slate-200 bg-slate-50',
-          input: 'border border-slate-200 bg-white text-slate-950',
-          button: 'bg-slate-950 text-white hover:bg-slate-800',
-        }
+      : layoutKey === 'profile-business' || task === 'pdf' || task === 'org'
+        ? {
+            muted: 'text-[#4a5f5f]',
+            panel: 'border border-[#d4e0df] bg-white',
+            soft: 'border border-[#d4e0df] bg-[#f7fbfa]',
+            input: 'border border-border bg-input text-foreground',
+            button: 'bg-[#004040] text-white hover:bg-[#003030]',
+          }
+        : {
+            muted: 'text-slate-600',
+            panel: 'border border-slate-200 bg-white',
+            soft: 'border border-slate-200 bg-slate-50',
+            input: 'border border-border bg-input text-foreground',
+            button: 'bg-slate-950 text-white hover:bg-slate-800',
+          }
 
   return (
     <div className={`min-h-screen ${shellClass}`}>
       <NavbarShell />
       <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        {task === 'profile' ? <ProfileAuthBanner /> : null}
         {task === 'listing' ? (
           <SchemaJsonLd
             data={[
