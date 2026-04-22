@@ -233,6 +233,13 @@ export async function buildSiteMetadata(): Promise<Metadata> {
     description: siteDescription,
     keywords: ctx.keywords,
     robots: buildRobots(ctx.robotsIndex, ctx.robotsFollow),
+    icons: {
+      icon: [
+        { url: "/favicon.png", sizes: "any" },
+        { url: "/favicon.ico", sizes: "any" },
+      ],
+      apple: [{ url: "/apple-icon.png" }],
+    },
     authors: [{ name: SITE_CONFIG.name }],
     creator: SITE_CONFIG.name,
     alternates: {
@@ -302,22 +309,28 @@ export async function buildPageMetadata(options: PageMetadataOptions): Promise<M
   };
 }
 
+type BuildTaskMetadataOptions = Omit<PageMetadataOptions, "path"> & {
+  /** When set, used for `resolveSeoContext` (e.g. custom list route). Defaults to the task’s `config.route`. */
+  path?: string;
+};
+
 export const buildTaskMetadata = async (
   task: TaskKey,
-  options?: Omit<PageMetadataOptions, "path">
+  options?: BuildTaskMetadataOptions
 ): Promise<Metadata> => {
   const config = getTaskConfig(task);
-  const title = config ? `${config.label} | ${SITE_CONFIG.name}` : SITE_CONFIG.seo.title;
-  const description = normalizeDescription(config?.description || SITE_CONFIG.seo.description);
-  const path = config?.route || "/";
+  const defaultTitle = config ? `${config.label} | ${SITE_CONFIG.name}` : SITE_CONFIG.seo.title;
+  const defaultDescription = normalizeDescription(config?.description || SITE_CONFIG.seo.description);
+  const path = (options?.path ?? config?.route) || "/";
+  const { path: _pathFromOptions, ...rest } = options || {};
 
   return buildPageMetadata({
     path,
-    title,
-    description,
-    openGraphTitle: title,
-    openGraphDescription: description,
-    ...options,
+    title: defaultTitle,
+    description: defaultDescription,
+    openGraphTitle: defaultTitle,
+    openGraphDescription: defaultDescription,
+    ...rest,
   });
 };
 

@@ -33,9 +33,9 @@ export const siteTaskDefinitions = [
   },
   {
     key: 'profile',
-    label: 'Profiles',
+    label: 'Profile',
     route: '/profile',
-    description: 'Creator and business profiles.',
+    description: 'Professional profiles and business identity.',
     contentType: 'profile',
     enabled: true,
   },
@@ -57,19 +57,19 @@ export const siteTaskDefinitions = [
   },
   {
     key: 'pdf',
-    label: 'PDF Library',
+    label: 'PDF Services',
     route: '/pdf',
-    description: 'PDF resources and downloads.',
+    description: 'Convert, edit, merge, and publish PDF documents.',
     contentType: 'pdf',
     enabled: true,
   },
   {
     key: 'org',
-    label: 'Organizations',
+    label: 'Our Team',
     route: '/team',
-    description: 'Organization profiles and directories.',
+    description: 'Meet the people behind our PDF and profile services.',
     contentType: 'profile',
-    enabled: false,
+    enabled: true,
   },
 ] as const
 
