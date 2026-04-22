@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ProfileAuthBanner } from "@/components/auth/profile-auth-banner";
 import { Footer } from "@/components/shared/footer";
 import { NavbarShell } from "@/components/shared/navbar-shell";
 import { ContentImage } from "@/components/shared/content-image";
@@ -110,6 +111,7 @@ export default async function ProfileDetailPage({ params }: { params: Promise<{ 
     <div className="min-h-screen bg-background">
       <NavbarShell />
       <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+        <ProfileAuthBanner />
         <SchemaJsonLd data={breadcrumbData} />
         <section className="rounded-3xl border border-border/60 bg-white/90 p-8 shadow-sm md:p-12">
           <div className="grid gap-8 md:grid-cols-[200px_1fr] md:items-start">

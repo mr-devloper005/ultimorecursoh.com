@@ -5,7 +5,7 @@ export const siteTaskDefinitions = [
     route: '/listings',
     description: 'Verified businesses and services.',
     contentType: 'listing',
-    enabled: true,
+    enabled: false,
   },
   {
     key: 'classified',
@@ -13,7 +13,7 @@ export const siteTaskDefinitions = [
     route: '/classifieds',
     description: 'Local offers, jobs, and deals.',
     contentType: 'classified',
-    enabled: true,
+    enabled: false,
   },
   {
     key: 'article',
@@ -21,7 +21,7 @@ export const siteTaskDefinitions = [
     route: '/articles',
     description: 'Insights, blogs, and long-form content.',
     contentType: 'article',
-    enabled: true,
+    enabled: false,
   },
   {
     key: 'image',
@@ -29,13 +29,13 @@ export const siteTaskDefinitions = [
     route: '/images',
     description: 'Galleries and media-first posts.',
     contentType: 'image',
-    enabled: true,
+    enabled: false,
   },
   {
     key: 'profile',
-    label: 'Profiles',
+    label: 'Profile',
     route: '/profile',
-    description: 'Creator and business profiles.',
+    description: 'Professional profiles and business identity.',
     contentType: 'profile',
     enabled: true,
   },
@@ -45,7 +45,7 @@ export const siteTaskDefinitions = [
     route: '/sbm',
     description: 'Curated bookmarks and resources.',
     contentType: 'social',
-    enabled: true,
+    enabled: false,
   },
   {
     key: 'comment',
@@ -57,19 +57,19 @@ export const siteTaskDefinitions = [
   },
   {
     key: 'pdf',
-    label: 'PDF Library',
+    label: 'PDF Services',
     route: '/pdf',
-    description: 'PDF resources and downloads.',
+    description: 'Convert, edit, merge, and publish PDF documents.',
     contentType: 'pdf',
     enabled: true,
   },
   {
     key: 'org',
-    label: 'Organizations',
+    label: 'Our Team',
     route: '/team',
-    description: 'Organization profiles and directories.',
+    description: 'Meet the people behind our PDF and profile services.',
     contentType: 'profile',
-    enabled: false,
+    enabled: true,
   },
 ] as const
 
